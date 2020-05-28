@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class Lexer {
 
     private List<Token> tokens;
-    private String END_OF_LINE = "$";
+    private char END_OF_LINE = '$';
 
     public Lexer() {
         tokens = new ArrayList<>();
@@ -34,6 +34,11 @@ public class Lexer {
             String curLine = buffer.append(END_OF_LINE).toString();
             for (int i = 0; i < curLine.length(); ) {
                 boolean isMatched = false;
+                if(i == curLine.length() - 1){ //position at $ symbol
+                    //replace all last $ symbols to NEWLINE token
+                    tokens.add(new Token(TokenName.NEW_LINE,null,new Location(curLineNum,i)));
+                    break;
+                }
                 for (Pair patternPair : Patterns.patterns) {
                     if (patternPair.getFirst() instanceof String) {
                         Pattern p = Pattern.compile((String) patternPair.getFirst(), Pattern.CASE_INSENSITIVE);
@@ -42,10 +47,13 @@ public class Lexer {
                             String matchedText = null;
                             if(patternPair.getSecond() != TokenName.NEW_LINE) {
                                 matchedText = curLine.substring(matcher.start(), matcher.end());
+                                if(matcher.end() == curLine.length()){
+                                    matchedText = matchedText.substring(matcher.start(),matcher.end() - 1);
+                                }
                             }
                             isMatched = true;
                             i = matcher.end() + 1;
-                            Location begin = new Location(curLineNum, matcher.end());
+                            Location begin = new Location(curLineNum, matcher.start());
                             tokens.add(new Token((TokenName) patternPair.getSecond(), matchedText, begin));
                             break;
                         }
@@ -54,7 +62,7 @@ public class Lexer {
                         Pair<Integer, Integer> matchPos = automaton.match(curLine, i);
                         if (matchPos.getFirst() != null & matchPos.getSecond() != null) {
                             String matchedText = null;
-                            if((TokenName)patternPair.getSecond() != TokenName.NEW_LINE) {
+                            if(patternPair.getSecond() != TokenName.NEW_LINE) {
                                 matchedText = curLine.substring(matchPos.getFirst(), matchPos.getSecond());
                             }
                             i = matchPos.getSecond();

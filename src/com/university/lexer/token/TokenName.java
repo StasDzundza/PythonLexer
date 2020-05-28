@@ -6,12 +6,11 @@ public enum TokenName {
     INDENT,
     DEDENT,
     COMMENT,//#
-    OPERATOR, //+,-,*,/,**,&,|,^
+    OPERATOR, //+,-,*,/,**,&,|,^,=,+=,-=,%=,*=,/=,&=,|=,^=
     COMPARISON_OPERATOR, //<,<=,>,>=,==,!=
-    ASSIGNMENT_OPERATOR,//=,+=,-=,%=,*=,/=,&=,|=,^=
+    DATA_TYPE, //int,float,complex,str,bool
     KEYWORD, //import,as,class,def,pass,if,elif,else,try,except,throw,for,while,in,is,await,None,raise,True,False,return
     // and,or,lambda,break,continue,from,assert,with,not,async,yield,global,del
-    DATA_TYPE, //int,float,complex,str,bool
     SEPARATOR, //, ; :
     BRACKET, // (, ), [, ], {, }
     DOT, // .
