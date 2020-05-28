@@ -12,7 +12,6 @@ public class Main {
 	    if(args.length != 1){
 	        throw new IllegalArgumentException("There should be passed file");
         }
-
         Lexer lexer = new Lexer();
 	    try {
             List<Token> tokens = lexer.tokenize(args[0]);
