@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,7 +54,17 @@ public class Lexer {
                             i = matchPos.getSecond();
                             isMatched = true;
                             Location begin = new Location(curLineNum, matchPos.getFirst() + 1);
-                            tokens.add(new Token((TokenName) patternPair.getSecond(), matchedText, begin));
+                            if(patternPair.getSecond() == TokenName.IDENTIFIER) {
+                                if (findTextInArray(Patterns.keywords, matchedText)) {
+                                    tokens.add(new Token(TokenName.KEYWORD, matchedText, begin));
+                                } else if (findTextInArray(Patterns.dataTypes, matchedText)){
+                                    tokens.add(new Token(TokenName.DATA_TYPE, matchedText, begin));
+                                }else{
+                                    tokens.add(new Token(TokenName.IDENTIFIER, matchedText, begin));
+                                }
+                            }else {
+                                tokens.add(new Token((TokenName) patternPair.getSecond(), matchedText, begin));
+                            }
                             break;
                         }
                     }
@@ -69,5 +81,9 @@ public class Lexer {
         }
         reader.close();
         return tokens;
+    }
+
+    private boolean findTextInArray(String[]array,String text){
+        return Arrays.asList(array).contains(text);
     }
 }

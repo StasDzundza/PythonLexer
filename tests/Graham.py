@@ -1,5 +1,5 @@
 import mylib as ml
-       #arith$metic
+       #arithmetic
 a=5+6
 b=6*756.987
 #assignment
@@ -9,17 +9,24 @@ b**=6
 a==b
 a<=b
 a!=b
-#brackets
+#bracket$
 c = [(a,b),{a:b}]
 #class
 class myClass:
     def __init__(self):
         a = 6
-#using class
+#u$ing class
 m = myClass()
 m.a
 ## data types
 k=float(a)
 intstr=str(b)
+#Keywords
+
+for i in range(0,5):
+    while True:
+        print(i)
+#
+
 
 
