@@ -11,8 +11,9 @@ public class Automaton {
 
     public Pair<Integer, Integer> match(String text, int fromPos) {
         finiteStateMachine.reset();
+        TransitionFunction transitionFunction = (c)->{return Character.isDigit(c);};
         int curPos = fromPos;
-        while (finiteStateMachine.switchState(text.charAt(curPos)) != null) {
+        while (curPos < text.length() && finiteStateMachine.switchState(text.charAt(curPos)) != null) {
             curPos++;
         }
         if (finiteStateMachine.canStop()) {

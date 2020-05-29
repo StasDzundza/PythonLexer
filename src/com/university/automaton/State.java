@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class State {
     private Map<Character,State> transitions;
-    private boolean isFinal = false;
+    private boolean isFinal;
 
     public State(boolean isFinal){
         transitions = new HashMap<>();
@@ -21,7 +21,7 @@ public class State {
     }
 
     public State getNextStateByTransition(char symbol){
-        return (State)transitions.get(symbol);
+        return transitions.get(symbol);
     }
 
     public boolean isFinal(){

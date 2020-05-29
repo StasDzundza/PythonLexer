@@ -12,11 +12,23 @@ public class StateMachinesFactory {
         State q7 = new State(true);// ^
         State q8 = new State(true);// |
         State q9 = new State(true);// =
+        State q10 = new State(true);// //
+        State q11 = new State(true);// ~
+        State q12 = new State(false);// <
+        State q13 = new State(true);// <<
+        State q14 = new State(false);// >
+        State q15 = new State(true);// >>
+        State q16 = new State(true);// %
+
+        q12.addTransition('<',q13); //< to <<
+        q14.addTransition('>',q15);// > to >>
 
         q1.addTransition('=',q9);q2.addTransition('=',q9);q3.addTransition('=',q9);
         q4.addTransition('=',q9);q5.addTransition('=',q9);q6.addTransition('=',q9);
-        q7.addTransition('=',q9);q8.addTransition('=',q9);
-        q3.addTransition('*',q4);
+        q7.addTransition('=',q9);q8.addTransition('=',q9);q10.addTransition('=',q9);
+        q13.addTransition('=',q9);q15.addTransition('=',q9);q16.addTransition('=',q9);// all to =
+        q3.addTransition('*',q4);// * to **
+        q5.addTransition('/',q10);// / to //
 
         initial.addTransition('+',q1);
         initial.addTransition('-',q2);
@@ -26,6 +38,10 @@ public class StateMachinesFactory {
         initial.addTransition('^',q7);
         initial.addTransition('|',q8);
         initial.addTransition('=',q9);
+        initial.addTransition('~',q11);
+        initial.addTransition('<',q12);
+        initial.addTransition('>',q14);
+        initial.addTransition('%',q16);
 
         return new FiniteStateMachine(initial);
     }
@@ -34,14 +50,14 @@ public class StateMachinesFactory {
         State initial = new State(false);
         State q1 = new State(true);// <
         State q2 = new State(true);// >
-        State q3 = new State(true);// !
+        State q3 = new State(false);// !
         State q4 = new State(false);// =
         State q5 = new State(true);// ==
 
-        q1.addTransition('=',q4);
-        q2.addTransition('=',q4);
-        q3.addTransition('=',q4);
-        q4.addTransition('=',q5);
+        q1.addTransition('=',q4); // < to <=
+        q2.addTransition('=',q4); // > to >=
+        q3.addTransition('=',q4); // ! to !=
+        q4.addTransition('=',q5); // = to ==
 
         initial.addTransition('<',q1);
         initial.addTransition('>',q2);
@@ -83,10 +99,10 @@ public class StateMachinesFactory {
         return new FiniteStateMachine(initial);
     }
 
-    public static FiniteStateMachine newLineStateMachine(){
+    public static FiniteStateMachine dotStateMachine(){
         State initial = new State(false);
-        State q1 = new State(true);// '\n'
-        initial.addTransition('\n',q1);
+        State q1 = new State(true);// .
+        initial.addTransition('.',q1);
         return new FiniteStateMachine(initial);
     }
 }
