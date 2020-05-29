@@ -18,5 +18,8 @@ class myClass:
 #using class
 m = myClass()
 m.a
+## data types
+k=float(a)
+intstr=str(b)
 
 

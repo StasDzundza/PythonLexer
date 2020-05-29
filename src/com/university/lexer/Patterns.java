@@ -1,17 +1,23 @@
 package com.university.lexer;
 
-import com.university.automaton.StateMachinesFactory;
+import com.university.automaton.StateMachineFactory;
 import com.university.lexer.token.TokenName;
 import com.university.utils.Pair;
 
 public class Patterns {
     public static final Pair[] patterns = new Pair[]{
             new Pair("#.*(\\r|\\n|\\r\\n|$)", TokenName.COMMENT),
-            new Pair(StateMachinesFactory.comparisonOperatorStateMachine(),TokenName.COMPARISON_OPERATOR),
-            new Pair(StateMachinesFactory.operatorStateMachine(),TokenName.OPERATOR),
-            new Pair(StateMachinesFactory.separatorStateMachine(),TokenName.SEPARATOR),
-            new Pair(StateMachinesFactory.bracketStateMachine(),TokenName.BRACKET),
-            new Pair(StateMachinesFactory.dotStateMachine(),TokenName.DOT),
-            new Pair(StateMachinesFactory.numberStateMachine(),TokenName.NUMBER)
+            new Pair("int\\b", TokenName.DATA_TYPE),
+            new Pair("float\\b", TokenName.DATA_TYPE),
+            new Pair("str\\b", TokenName.DATA_TYPE),
+            new Pair("complex\\b", TokenName.DATA_TYPE),
+            new Pair("bool\\b", TokenName.DATA_TYPE),
+            new Pair(StateMachineFactory.comparisonOperatorStateMachine(),TokenName.COMPARISON_OPERATOR),
+            new Pair(StateMachineFactory.operatorStateMachine(),TokenName.OPERATOR),
+            new Pair(StateMachineFactory.separatorStateMachine(),TokenName.SEPARATOR),
+            new Pair(StateMachineFactory.bracketStateMachine(),TokenName.BRACKET),
+            new Pair(StateMachineFactory.dotStateMachine(),TokenName.DOT),
+            new Pair(StateMachineFactory.numberStateMachine(),TokenName.NUMBER),
+            new Pair(StateMachineFactory.identifierStateMachine(),TokenName.IDENTIFIER)
     };
 }

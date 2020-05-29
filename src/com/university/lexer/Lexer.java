@@ -39,7 +39,7 @@ public class Lexer {
                         if (matcher.find(i) && matcher.start() == i) {
                             String matchedText = curLine.substring(matcher.start(), matcher.end());
                             isMatched = true;
-                            i = matcher.end() + 1;
+                            i = matcher.end();
                             Location begin = new Location(curLineNum, matcher.start() + 1);
                             tokens.add(new Token((TokenName) patternPair.getSecond(), matchedText, begin));
                             break;
@@ -63,7 +63,7 @@ public class Lexer {
                     ++i;
                 }
             }
-            tokens.add(new Token(TokenName.NEW_LINE,null,new Location(curLineNum,line.length())));
+            tokens.add(new Token(TokenName.NEW_LINE,null,new Location(curLineNum,line.length() + 1)));
             line = reader.readLine();
             curLineNum++;
         }

@@ -14,7 +14,7 @@ public enum TokenName {
     SEPARATOR, //, ; :
     BRACKET, // (, ), [, ], {, }
     DOT, // .
-    ID,
+    IDENTIFIER,
     NUMBER,
     STRING,
     MULTILINE_STRING,

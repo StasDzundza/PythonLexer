@@ -1,6 +1,6 @@
 package com.university.automaton;
 
-public class StateMachinesFactory {
+public class StateMachineFactory {
     public static FiniteStateMachine operatorStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);// +
@@ -116,6 +116,16 @@ public class StateMachinesFactory {
         return new FiniteStateMachine(initial);
     }
 
+    public static FiniteStateMachine identifierStateMachine(){
+        State initial = new State(false);
+        State q1 = new State(true);
+        TransitionFunction startNameTransition = (c) -> c == '_' || Character.isLetter(c);
+        initial.addTransition(new FuncTransition(startNameTransition, q1));
+        TransitionFunction nameTransition = (c) -> c == '_' || Character.isLetter(c) || Character.isDigit(c);
+        q1.addTransition(new FuncTransition(nameTransition, q1));
+        return new FiniteStateMachine(initial);
+    }
+
     public static FiniteStateMachine numberStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);
@@ -124,4 +134,6 @@ public class StateMachinesFactory {
         q1.addTransition(new FuncTransition(transitionFunction, q1));
         return new FiniteStateMachine(initial);
     }
+
+
 }
