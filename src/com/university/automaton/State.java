@@ -1,27 +1,28 @@
 package com.university.automaton;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class State {
-    private Map<Character,State> transitions;
+    private List<Transition> transitions;
     private boolean isFinal;
 
     public State(boolean isFinal){
-        transitions = new HashMap<>();
+        transitions = new ArrayList<>();
         this.isFinal = isFinal;
     }
 
-    public void addTransition(char symbol, State state){
-        transitions.put(symbol,state);
-    }
-
-    public boolean isPossibleTransitionBy(char symbol){
-        return (transitions.get(symbol) != null)?true:false;
+    public void addTransition(Transition transition){
+        transitions.add(transition);
     }
 
     public State getNextStateByTransition(char symbol){
-        return transitions.get(symbol);
+        for(Transition transition : transitions){
+            if(transition.isPossible(symbol)){
+                return transition.getState();
+            }
+        }
+        return null;
     }
 
     public boolean isFinal(){

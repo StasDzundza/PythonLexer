@@ -1,10 +1,14 @@
 import mylib as ml
        #arith$metic
-a = 5+6
-b = 6*7
+a=5+6
+b=6*756.987
 #assignment
 a/=5
 b**=6
+#comparison
+a==b
+a<=b
+a!=b
 #brackets
 c = [(a,b),{a:b}]
 #class

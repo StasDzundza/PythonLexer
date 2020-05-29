@@ -10,11 +10,11 @@ public class FiniteStateMachine{
     }
 
     public State switchState(char symbol){
-        if(currentState.isPossibleTransitionBy(symbol)){
-            currentState = currentState.getNextStateByTransition(symbol);
-            return currentState;
+        State nextState = currentState.getNextStateByTransition(symbol);
+        if(nextState != null){
+            currentState = nextState;
         }
-        return null;
+        return nextState;
     }
 
     public boolean canStop(){

@@ -1,5 +1,5 @@
 package com.university.automaton;
 
 public interface TransitionFunction {
-    boolean transitionFunction(char c);
+    boolean isPossibleToTransit(char c);
 }

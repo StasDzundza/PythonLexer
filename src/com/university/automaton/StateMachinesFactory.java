@@ -1,7 +1,7 @@
 package com.university.automaton;
 
 public class StateMachinesFactory {
-    public static FiniteStateMachine operatorStateMachine(){
+    public static FiniteStateMachine operatorStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);// +
         State q2 = new State(true);// -
@@ -20,54 +20,64 @@ public class StateMachinesFactory {
         State q15 = new State(true);// >>
         State q16 = new State(true);// %
 
-        q12.addTransition('<',q13); //< to <<
-        q14.addTransition('>',q15);// > to >>
+        q3.addTransition(new SymbolTransition('*', q4));// * to **
+        q5.addTransition(new SymbolTransition('/', q10));// / to //
+        q12.addTransition(new SymbolTransition('<', q13)); //< to <<
+        q14.addTransition(new SymbolTransition('>', q15));// > to >>
 
-        q1.addTransition('=',q9);q2.addTransition('=',q9);q3.addTransition('=',q9);
-        q4.addTransition('=',q9);q5.addTransition('=',q9);q6.addTransition('=',q9);
-        q7.addTransition('=',q9);q8.addTransition('=',q9);q10.addTransition('=',q9);
-        q13.addTransition('=',q9);q15.addTransition('=',q9);q16.addTransition('=',q9);// all to =
-        q3.addTransition('*',q4);// * to **
-        q5.addTransition('/',q10);// / to //
+        //all to =
+        q1.addTransition(new SymbolTransition('=', q9));
+        q2.addTransition(new SymbolTransition('=', q9));
+        q3.addTransition(new SymbolTransition('=', q9));
+        q4.addTransition(new SymbolTransition('=', q9));
+        q5.addTransition(new SymbolTransition('=', q9));
+        q6.addTransition(new SymbolTransition('=', q9));
+        q7.addTransition(new SymbolTransition('=', q9));
+        q8.addTransition(new SymbolTransition('=', q9));
+        q10.addTransition(new SymbolTransition('=', q9));
+        q13.addTransition(new SymbolTransition('=', q9));
+        q15.addTransition(new SymbolTransition('=', q9));
+        q16.addTransition(new SymbolTransition('=', q9));
 
-        initial.addTransition('+',q1);
-        initial.addTransition('-',q2);
-        initial.addTransition('*',q3);
-        initial.addTransition('/',q5);
-        initial.addTransition('&',q6);
-        initial.addTransition('^',q7);
-        initial.addTransition('|',q8);
-        initial.addTransition('=',q9);
-        initial.addTransition('~',q11);
-        initial.addTransition('<',q12);
-        initial.addTransition('>',q14);
-        initial.addTransition('%',q16);
+        initial.addTransition(new SymbolTransition('+', q1));
+        initial.addTransition(new SymbolTransition('-', q2));
+        initial.addTransition(new SymbolTransition('*', q3));
+        initial.addTransition(new SymbolTransition('/', q5));
+        initial.addTransition(new SymbolTransition('&', q6));
+        initial.addTransition(new SymbolTransition('^', q7));
+        initial.addTransition(new SymbolTransition('|', q8));
+        initial.addTransition(new SymbolTransition('=', q9));
+        initial.addTransition(new SymbolTransition('~', q11));
+        initial.addTransition(new SymbolTransition('<', q12));
+        initial.addTransition(new SymbolTransition('>', q14));
+        initial.addTransition(new SymbolTransition('%', q16));
 
         return new FiniteStateMachine(initial);
     }
 
-    public static FiniteStateMachine comparisonOperatorStateMachine(){
+    public static FiniteStateMachine comparisonOperatorStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);// <
         State q2 = new State(true);// >
         State q3 = new State(false);// !
-        State q4 = new State(false);// =
+        State q4 = new State(true);// <=, >=, ==,!=
         State q5 = new State(true);// ==
+        State q6 = new State(false); // =
 
-        q1.addTransition('=',q4); // < to <=
-        q2.addTransition('=',q4); // > to >=
-        q3.addTransition('=',q4); // ! to !=
-        q4.addTransition('=',q5); // = to ==
+        q1.addTransition(new SymbolTransition('=', q4)); // < to <=
+        q2.addTransition(new SymbolTransition('=', q4)); // > to >=
+        q3.addTransition(new SymbolTransition('=', q4)); // ! to !=
+        q6.addTransition(new SymbolTransition('=', q5)); // = to ==
 
-        initial.addTransition('<',q1);
-        initial.addTransition('>',q2);
-        initial.addTransition('!',q3);
-        initial.addTransition('=',q4);
+        initial.addTransition(new SymbolTransition('<', q1));
+        initial.addTransition(new SymbolTransition('>', q2));
+        initial.addTransition(new SymbolTransition('!', q3));
+        initial.addTransition(new SymbolTransition('=', q6));
 
         return new FiniteStateMachine(initial);
     }
 
-    public static FiniteStateMachine bracketStateMachine(){
+    public static FiniteStateMachine bracketStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);// (
         State q2 = new State(true);// )
@@ -76,33 +86,42 @@ public class StateMachinesFactory {
         State q5 = new State(true);// [
         State q6 = new State(true);// ]
 
-        initial.addTransition('(',q1);
-        initial.addTransition(')',q2);
-        initial.addTransition('{',q3);
-        initial.addTransition('}',q4);
-        initial.addTransition('[',q5);
-        initial.addTransition(']',q6);
+        initial.addTransition(new SymbolTransition('(', q1));
+        initial.addTransition(new SymbolTransition(')', q2));
+        initial.addTransition(new SymbolTransition('{', q3));
+        initial.addTransition(new SymbolTransition('}', q4));
+        initial.addTransition(new SymbolTransition('[', q5));
+        initial.addTransition(new SymbolTransition(']', q6));
 
         return new FiniteStateMachine(initial);
     }
 
-    public static FiniteStateMachine separatorStateMachine(){
+    public static FiniteStateMachine separatorStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);// :
         State q2 = new State(true);// ,
         State q3 = new State(true);// ;
 
-        initial.addTransition(':',q1);
-        initial.addTransition(',',q2);
-        initial.addTransition(';',q3);
+        initial.addTransition(new SymbolTransition(':', q1));
+        initial.addTransition(new SymbolTransition(',', q2));
+        initial.addTransition(new SymbolTransition(';', q3));
 
         return new FiniteStateMachine(initial);
     }
 
-    public static FiniteStateMachine dotStateMachine(){
+    public static FiniteStateMachine dotStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);// .
-        initial.addTransition('.',q1);
+        initial.addTransition(new SymbolTransition('.', q1));
+        return new FiniteStateMachine(initial);
+    }
+
+    public static FiniteStateMachine numberStateMachine() {
+        State initial = new State(false);
+        State q1 = new State(true);
+        TransitionFunction transitionFunction = (c) -> Character.isDigit(c);
+        initial.addTransition(new FuncTransition(transitionFunction, q1));
+        q1.addTransition(new FuncTransition(transitionFunction, q1));
         return new FiniteStateMachine(initial);
     }
 }
