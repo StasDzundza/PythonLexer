@@ -13,7 +13,9 @@ public class Patterns {
             new Pair(StateMachineFactory.bracketStateMachine(), TokenName.BRACKET),
             new Pair(StateMachineFactory.dotStateMachine(), TokenName.DOT),
             new Pair(StateMachineFactory.numberStateMachine(), TokenName.NUMBER),
-            new Pair(StateMachineFactory.identifierStateMachine(), TokenName.IDENTIFIER)
+            new Pair(StateMachineFactory.identifierStateMachine(), TokenName.IDENTIFIER),
+            new Pair(StateMachineFactory.doubleQuoteStringStateMachine(), TokenName.STRING),
+            new Pair(StateMachineFactory.singleQuoteStringStateMachine(), TokenName.STRING),
     };
 
     public static final String[] keywords = {"import","as","class","def","pass","if","elif","else","try","except","throw",

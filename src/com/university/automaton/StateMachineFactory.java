@@ -116,7 +116,7 @@ public class StateMachineFactory {
         return new FiniteStateMachine(initial);
     }
 
-    public static FiniteStateMachine identifierStateMachine(){
+    public static FiniteStateMachine identifierStateMachine() {
         State initial = new State(false);
         State q1 = new State(true);
         TransitionFunction startNameTransition = (c) -> c == '_' || Character.isLetter(c);
@@ -132,6 +132,42 @@ public class StateMachineFactory {
         TransitionFunction transitionFunction = (c) -> Character.isDigit(c);
         initial.addTransition(new FuncTransition(transitionFunction, q1));
         q1.addTransition(new FuncTransition(transitionFunction, q1));
+        return new FiniteStateMachine(initial);
+    }
+
+    public static FiniteStateMachine doubleQuoteStringStateMachine() {
+        State initial = new State(false);
+        State q1 = new State(false);
+        State q2 = new State(true);
+        State q3 = new State(false);
+        TransitionFunction strSymbols = (c) -> c != '\"' && c != '\\';
+        TransitionFunction notSlash = (c) -> c!='\\';
+
+        q1.addTransition(new FuncTransition(strSymbols, q1));
+        q1.addTransition(new SymbolTransition('\\',q3));
+        q3.addTransition(new SymbolTransition('\\',q3));
+        q3.addTransition(new FuncTransition(notSlash,q1));
+        q1.addTransition(new SymbolTransition('\"', q2)); //end string
+        initial.addTransition(new SymbolTransition('\"', q1)); // start string
+
+        return new FiniteStateMachine(initial);
+    }
+
+    public static FiniteStateMachine singleQuoteStringStateMachine() {
+        State initial = new State(false);
+        State q1 = new State(false);
+        State q2 = new State(true);
+        State q3 = new State(false);
+        TransitionFunction strSymbols = (c) -> c != '\'' && c != '\\';
+        TransitionFunction notSlash = (c) -> c!='\\';
+
+        q1.addTransition(new FuncTransition(strSymbols, q1));
+        q1.addTransition(new SymbolTransition('\\',q3));
+        q3.addTransition(new SymbolTransition('\\',q3));
+        q3.addTransition(new FuncTransition(notSlash,q1));
+        q1.addTransition(new SymbolTransition('\'', q2)); //end string
+        initial.addTransition(new SymbolTransition('\'', q1)); // start string
+
         return new FiniteStateMachine(initial);
     }
 

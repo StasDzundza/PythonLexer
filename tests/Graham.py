@@ -26,7 +26,13 @@ intstr=str(b)
 for i in range(0,5):
     while True:
         print(i)
-#
+# strings
+string = "hello friend"
+string = 'hello friend'
+string = 'hello\' friend'
+string = 'hello "dear" friend'
+string = 'hello\" friend'
+string = "hello 'dear' friend"
 
 
 
