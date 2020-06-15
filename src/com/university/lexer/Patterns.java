@@ -1,11 +1,14 @@
 package com.university.lexer;
 
+import com.university.automaton.MultilineAutomaton;
 import com.university.automaton.StateMachineFactory;
 import com.university.lexer.token.TokenName;
 import com.university.utils.Pair;
 
 public class Patterns {
     public static final Pair[] patterns = new Pair[]{
+            new Pair(new MultilineAutomaton(), TokenName.MULTILINE_STRING),
+            new Pair(StateMachineFactory.whitespaceStateMachine(), TokenName.WHITESPACE),
             new Pair("#.*(\\r|\\n|\\r\\n|$)", TokenName.COMMENT),
             new Pair(StateMachineFactory.comparisonOperatorStateMachine(), TokenName.COMPARISON_OPERATOR),
             new Pair(StateMachineFactory.operatorStateMachine(), TokenName.OPERATOR),
@@ -15,11 +18,12 @@ public class Patterns {
             new Pair(StateMachineFactory.numberStateMachine(), TokenName.NUMBER),
             new Pair(StateMachineFactory.identifierStateMachine(), TokenName.IDENTIFIER),
             new Pair(StateMachineFactory.doubleQuoteStringStateMachine(), TokenName.STRING),
-            new Pair(StateMachineFactory.singleQuoteStringStateMachine(), TokenName.STRING),
+            new Pair(StateMachineFactory.singleQuoteStringStateMachine(), TokenName.STRING)
     };
 
     public static final String[] keywords = {"import","as","class","def","pass","if","elif","else","try","except","throw",
         "for","while","in","is","await","None","raise","True","False","return","and","or","lambda","break","continue","from",
         "assert","with","not","async","yield","global","del"};
     public static final String[] dataTypes = {"int","str","bool","float","complex"};
+    public static final char[] whitespaces = {'\t',' ', '\f'};
 }

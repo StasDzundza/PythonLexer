@@ -2,6 +2,7 @@ package com.university.lexer;
 
 import com.university.automaton.Automaton;
 import com.university.automaton.FiniteStateMachine;
+import com.university.automaton.MultilineAutomaton;
 import com.university.lexer.token.Location;
 import com.university.lexer.token.Token;
 import com.university.lexer.token.TokenName;
@@ -12,7 +13,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,6 +46,19 @@ public class Lexer {
                             tokens.add(new Token((TokenName) patternPair.getSecond(), matchedText, begin));
                             break;
                         }
+                    } else if(patternPair.getFirst() instanceof MultilineAutomaton) {
+                        MultilineAutomaton multilineAutomaton = (MultilineAutomaton)patternPair.getFirst();
+                        Pair<Integer, Integer> matchPos = multilineAutomaton.match(curLine,i);
+                        if (matchPos.getFirst() != null){
+                            tokens.add(new Token(TokenName.MULTILINE_STRING,"MS",new Location(matchPos.getFirst(),matchPos.getSecond())));
+                            isMatched = true;
+                            i = curLine.length();
+                            break;
+                        } else if (multilineAutomaton.started()) {
+                            isMatched = true;
+                            i = curLine.length();
+                            break;
+                        }
                     } else {
                         Automaton automaton = new Automaton((FiniteStateMachine) patternPair.getFirst());
                         Pair<Integer, Integer> matchPos = automaton.match(curLine, i);
@@ -75,10 +88,15 @@ public class Lexer {
                     ++i;
                 }
             }
-            tokens.add(new Token(TokenName.NEW_LINE,null,new Location(curLineNum,line.length() + 1)));
+            //tokens.add(new Token(TokenName.NEW_LINE,null,new Location(curLineNum,line.length() + 1)));
             line = reader.readLine();
             curLineNum++;
         }
+
+        if(((MultilineAutomaton)Patterns.patterns[0].getFirst()).started()){
+            tokens.add(new Token(TokenName.ERROR_TOKEN, null, new Location(0,0)));
+        }
+
         reader.close();
         return tokens;
     }

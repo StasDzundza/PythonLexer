@@ -1,5 +1,9 @@
 package com.university.automaton;
 
+import com.university.lexer.Patterns;
+
+import java.util.Arrays;
+
 public class StateMachineFactory {
     public static FiniteStateMachine operatorStateMachine() {
         State initial = new State(false);
@@ -171,5 +175,13 @@ public class StateMachineFactory {
         return new FiniteStateMachine(initial);
     }
 
+    public static FiniteStateMachine whitespaceStateMachine(){
+        State initial = new State(false);
+        State q1 = new State(true);
+        TransitionFunction funcTransition = (c) -> c == ' ' || c == '\t';
+        q1.addTransition(new FuncTransition(funcTransition,q1));
+        initial.addTransition(new FuncTransition(funcTransition,q1));
+        return new FiniteStateMachine(initial);
+    }
 
 }

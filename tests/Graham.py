@@ -1,4 +1,4 @@
-import mylib as ml
+    import mylib as ml
        #arithmetic
 a=5+6
 b=6*756.987
@@ -33,6 +33,18 @@ string = 'hello\' friend'
 string = 'hello "dear" friend'
 string = 'hello\" friend'
 string = "hello 'dear' friend"
+string = 'hel'lo frie'nd'
 
+"""
+viehfuehf
+fjehfjehfj
+eihjehgf
+"""
+
+"""
+viehfuehf
+fjehfjehfj
+eihjehgf
+\"""
 
 

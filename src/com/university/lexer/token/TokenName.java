@@ -3,8 +3,6 @@ package com.university.lexer.token;
 public enum TokenName {
     WHITESPACE, // \t, space, ......
     NEW_LINE,
-    INDENT,
-    DEDENT,
     COMMENT,//#
     OPERATOR, //+,-,*,/, //, **,&,|,^,=,+=,-=,%=,*=,/=,&=,|=,^=, //=, ~, <<, >>, %
     COMPARISON_OPERATOR, //<,<=,>,>=,==,!=
