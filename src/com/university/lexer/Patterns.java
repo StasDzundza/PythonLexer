@@ -22,12 +22,14 @@ public class Patterns {
             new Pair(StateMachineFactory.numberStateMachine(), TokenName.NUMBER),
             new Pair(StateMachineFactory.identifierStateMachine(), TokenName.IDENTIFIER),
             new Pair(StateMachineFactory.doubleQuoteStringStateMachine(), TokenName.STRING),
-            new Pair(StateMachineFactory.singleQuoteStringStateMachine(), TokenName.STRING)
+            new Pair(StateMachineFactory.singleQuoteStringStateMachine(), TokenName.STRING),
+            new Pair(StateMachineFactory.newLineStateMachine(), TokenName.NEW_LINE)
     };
 
     private static final String[] KEYWORDS_VALUES = {"import","as","class","def","pass","if","elif","else","try","except","throw",
         "for","while","in","is","await","None","raise","True","False","return","and","or","lambda","break","continue","from",
         "assert","with","not","async","yield","global","del"};
+
     private static final String[] DATA_TYPE_VALUES = {"int","str","bool","float","complex"};
 
     private static Set<String> KEYWORDS = new HashSet<>(Arrays.asList(KEYWORDS_VALUES));

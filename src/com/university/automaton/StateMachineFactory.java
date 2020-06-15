@@ -184,4 +184,10 @@ public class StateMachineFactory {
         return new FiniteStateMachine(initial);
     }
 
+    public static FiniteStateMachine newLineStateMachine(){
+        State initial = new State(false);
+        State q1 = new State(true);
+        initial.addTransition(new SymbolTransition('\n',q1));
+        return new FiniteStateMachine(initial);
+    }
 }

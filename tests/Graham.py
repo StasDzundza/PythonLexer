@@ -30,21 +30,45 @@ for i in range(0,5):
 string = "hello friend"
 string = 'hello friend'
 string = 'hello\' friend'
+string = 'hello\
+'
 string = 'hello "dear" friend'
 string = 'hello\" friend'
 string = "hello 'dear' friend"
 string = 'hel'lo frie'nd'
 
+#correct multiline strings
+
 """
 viehfuehf
 fjehfjehfj
 eihjehgf
 """
 
+
+"""fuefuwgfugwfu"""
+
+"""
+   viehfuehf
+eih'''jehgf
+"""
+
+
+\"""
+viehfuehf
+eih'''jehgf
+"""
+
 """
 viehfuehf
-fjehfjehfj
 eihjehgf
+\""""
+
+#error multiline string
+"""
+stas
 \"""
+
+a = 5
 
 
