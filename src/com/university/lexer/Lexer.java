@@ -68,9 +68,9 @@ public class Lexer {
                             isMatched = true;
                             Location begin = new Location(curLineNum, matchPos.getFirst() + 1);
                             if(patternPair.getSecond() == TokenName.IDENTIFIER) {
-                                if (findTextInArray(Patterns.keywords, matchedText)) {
+                                if (Patterns.isKeyword(matchedText)) {
                                     tokens.add(new Token(TokenName.KEYWORD, matchedText, begin));
-                                } else if (findTextInArray(Patterns.dataTypes, matchedText)){
+                                } else if (Patterns.isDataType(matchedText)){
                                     tokens.add(new Token(TokenName.DATA_TYPE, matchedText, begin));
                                 }else{
                                     tokens.add(new Token(TokenName.IDENTIFIER, matchedText, begin));
