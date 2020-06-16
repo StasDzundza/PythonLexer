@@ -2,6 +2,8 @@ package com.university.lexer.token;
 
 public enum TokenName {
     WHITESPACE, // \t, space, ......
+    INDENT,
+    DEDENT,
     NEW_LINE,
     COMMENT,//#
     OPERATOR, //+,-,*,/, //, **,&,|,^,=,+=,-=,%=,*=,/=,&=,|=,^=, //=, ~, <<, >>, %

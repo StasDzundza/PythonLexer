@@ -48,7 +48,7 @@ public class MultilineAutomaton {
         if (startedNow) {
             state = nextState;
             startPos = fromPos;
-            return new Pair<>(null, null);
+            return new Pair<>(startPos, null);
         }
         if (state == 1) {
             do {
@@ -57,13 +57,12 @@ public class MultilineAutomaton {
                     if (endPos == 0 || text.charAt(endPos - 1) != '\\') {
                         state = 0;
                         return new Pair<>(startPos, endPos + 3);
-                    }else {
+                    } else {
                         ++fromPos;
                     }
                 }
-            }while (endPos != -1);
+            } while (endPos != -1);
             return new Pair<>(null, null);
-
         } else if (state == 2) {
             do {
                 endPos = text.indexOf("\"\"\"", fromPos);
@@ -71,11 +70,11 @@ public class MultilineAutomaton {
                     if (endPos == 0 || text.charAt(endPos - 1) != '\\') {
                         state = 0;
                         return new Pair<>(startPos, endPos + 3);
-                    }else {
+                    } else {
                         ++fromPos;
                     }
                 }
-            }while (endPos != -1);
+            } while (endPos != -1);
             return new Pair<>(null, null);
         } else {
             return new Pair<>(null, null);
